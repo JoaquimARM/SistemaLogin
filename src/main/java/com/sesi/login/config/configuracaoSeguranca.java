@@ -14,7 +14,14 @@ public class configuracaoSeguranca {
 		htpp.authorizeHttpRequests((authorize) ->
 		authorize
 			.requestMatchers("/login","/registrar").permitAll()
+			.anyRequest().authenticated()
+			.formLogin((form)->
+			form
+			.loginpage("/login")
+			.defaultSuccessUrl("/home",true))
+			
 				);
+		
 		return htpp.build();
 	}
 }
